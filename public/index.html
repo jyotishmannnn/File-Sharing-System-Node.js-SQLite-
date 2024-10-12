@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Share Swift</title>
+    <link rel="stylesheet" href="index.css">
+    <style>
+        /* Global reset and box-sizing */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(to right, #2F0743, #41295a);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+            color: white;
+        }
+
+        .container {
+            text-align: center;
+        }
+
+        .div1, .div2 {
+            margin: 20px;
+        }
+
+        /* Button styles */
+        .b1 {
+            display: inline-block;
+            padding: 15px 30px;
+            background-image: linear-gradient(144deg, #AF40FF, #5B42F3 50%, #00DDEB);
+            color: white;
+            font-size: 1.2em;
+            border: none;
+            border-radius: 8px;
+            box-shadow: rgba(151, 65, 252, 0.2) 0 15px 30px -5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            text-align: center;
+        }
+
+        /* Hover effect */
+        .b1:hover {
+            background-image: linear-gradient(144deg, #00DDEB, #5B42F3 50%, #AF40FF);
+            box-shadow: rgba(151, 65, 252, 0.4) 0 15px 30px -5px;
+            transform: translateY(-5px);
+        }
+
+        .b1 span {
+            display: inline-block;
+            position: relative;
+            transition: 0.3s;
+        }
+
+        /* Button text hover effect */
+        .b1:hover span {
+            padding-right: 25px;
+        }
+
+        .b1:hover span:after {
+            content: '→';
+            position: absolute;
+            right: 0;
+            opacity: 1;
+            transform: translateX(5px);
+        }
+
+        /* Styling for the project description */
+        .p1 {
+            font-size: 24px;
+            font-weight: 300;
+            margin-top: 40px;
+            color: #F0F0F0;
+        }
+
+        /* Responsive Design for Mobile */
+        @media (max-width: 768px) {
+            .b1 {
+                font-size: 1em;
+                padding: 12px 24px;
+            }
+
+            .p1 {
+                font-size: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="div1">
+            <a href="share.html" id="a1">
+                <button class="b1" id="id1" role="button">
+                    <span class="text">&ensp;SHARE&ensp;</span>
+                </button>
+            </a>
+        </div>
+        <div class="div2">
+            <a href="receive.html">
+                <button class="b1" id="id2" role="button">
+                    <span class="text">RECEIVE</span>
+                </button>
+            </a>
+        </div>
+        <div>
+            <p class="p1">
+                Computer Network Project
+            </p>
+        </div>
+    </div>
+</body>
+</html>

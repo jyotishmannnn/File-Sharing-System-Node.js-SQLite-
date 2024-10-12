@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Receive Files</title>
+ 
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap" rel="stylesheet">
+
+    <style>
+      *,
+      *:before,
+      *:after {
+          padding: 0;
+          margin: 0;
+          box-sizing: border-box;
+      }
+      body {
+          background-color: #080710;
+          font-family: 'Poppins', sans-serif;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          height: 100vh;
+          color: white;
+      }
+      .container {
+          text-align: center;
+          background: rgba(255, 255, 255, 0.1);
+          padding: 40px;
+          border-radius: 10px;
+          box-shadow: 0 15px 25px rgba(0, 0, 0, 0.4);
+      }
+      label {
+          display: block;
+          margin-top: 30px;
+          font-size: 16px;
+          font-weight: 500;
+      }
+      input {
+          display: block;
+          height: 50px;
+          width: 100%;
+          background-color: rgba(255, 255, 255, 0.07);
+          border-radius: 3px;
+          padding: 0 10px;
+          margin-top: 8px;
+          font-size: 14px;
+          font-weight: 300;
+      }
+      button {
+          margin-top: 50px;
+          width: 100%;
+          background-color: #ffffff;
+          color: #080710;
+          padding: 15px 0;
+          font-size: 18px;
+          font-weight: 600;
+          border-radius: 5px;
+          cursor: pointer;
+      }
+      button:hover {
+          background-color: #f1f1f1;
+          box-shadow: 0 5px 15px rgba(255, 255, 255, 0.3);
+          transform: translateY(-5px);
+      }
+      #responseMessage {
+          margin-top: 20px;
+          color: #fff;
+          font-size: 1.2em;
+      }
+      .download-btn {
+          margin-top: 20px;
+          display: none; /* Initially hidden */
+          padding: 10px 20px;
+          background-color: #00DDEB;
+          color: white;
+          border: none;
+          border-radius: 5px;
+          cursor: pointer;
+      }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <form id="receiveForm">
+            <h3>Receive File</h3>
+            <label for="code">Enter Unique Code</label>
+            <input type="text" id="code" name="code" placeholder="Enter your unique code" required>
+            <button type="button" id="receiveBtn">Receive</button>
+            <p id="responseMessage"></p>
+            <a id="downloadLink" class="download-btn" href="#" target="_blank">Download File</a>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('receiveBtn').addEventListener('click', function() {
+            const code = document.getElementById('code').value;
+
+            // Fetch request to get file details based on the code
+            fetch(`http://localhost:3000/receive/${code}`)
+            .then(response => response.json())
+            .then(data => {
+                if (data.message === 'File not found') {
+                    document.getElementById('responseMessage').innerText = 'File not found. Please check the code and try again.';
+                    document.getElementById('downloadLink').style.display = 'none'; // Hide download link
+                } else {
+                    document.getElementById('responseMessage').innerText = `File Name: ${data.file_name}, Uploaded On: ${data.upload_time}`;
+                    // Set download link URL
+                    document.getElementById('downloadLink').href = `http://localhost:3000/download/${code}`;
+                    document.getElementById('downloadLink').style.display = 'block'; // Show download link
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                document.getElementById('responseMessage').innerText = 'An error occurred while fetching the file details.';
+                document.getElementById('downloadLink').style.display = 'none'; // Hide download link
+            });
+        });
+    </script>
+</body>
+</html>
